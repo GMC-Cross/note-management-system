@@ -1,1 +1,16 @@
-
+[
+  {
+    "id": 1,
+    "title": "Ghi chú mẫu 1",
+    "content": "Nội dung ghi chú đầu tiên",
+    "createdAt": "2026-09-26T15:00:00Z",
+    "updatedAt": "2026-09-26T15:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Ghi chú mẫu 2",
+    "content": "Nội dung ghi chú thứ hai",
+    "createdAt": "2026-09-26T15:30:00Z",
+    "updatedAt": "2026-09-26T15:30:00Z"
+  }
+]
