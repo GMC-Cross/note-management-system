@@ -20,8 +20,9 @@
   "homepage": "https://github.com/GMC-Cross/note-management-system#readme",
   "dependencies": {
     "body-parser": "^2.3.0",
-    "cores": "^0.8.5",
+    "cores": "^0.8.0",
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "nodemon": "^1.14.10"
   }
 }
