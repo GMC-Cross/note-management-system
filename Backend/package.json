@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +16,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/GMC-Cross/note-management-system/issues"
   },
@@ -23,6 +25,6 @@
     "cores": "^0.8.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "nodemon": "^1.14.10"
+    "nodemon": "^1.19.4"
   }
 }
