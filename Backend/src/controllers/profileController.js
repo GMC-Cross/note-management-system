@@ -1,4 +1,4 @@
-import profilePath from "../config/storage.js";
+import { profilePath } from "../config/storage.js";
 
 export const getProfile = (req, res) => {
   try {

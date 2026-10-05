@@ -1,7 +1,7 @@
-import getFilePath from "../config/storage.js";
+import { getNoteFilePath } from "../config/storage.js";
 
 export const getNote = (req, res) => {
-  const filePath = getFilePath(req.params.topic);
+  const filePath = getNoteFilePath(req.params.topic);
   try {
     if (!fs.existsSync(filePath)) return res.json([]);
     const data = fs.readFileSync(filePath, "utf8");
@@ -12,7 +12,7 @@ export const getNote = (req, res) => {
 };
 
 export const createNote = (req, res) => {
-  const filePath = getFilePath(req.params.topic);
+  const filePath = getNoteFilePath(req.params.topic);
   try {
     let notes = fs.existsSync(filePath)
       ? JSON.parse(fs.readFileSync(filePath, "utf8"))
@@ -34,7 +34,7 @@ export const createNote = (req, res) => {
 };
 
 export const updateNote = (req, res) => {
-  const filePath = getFilePath(req.params.topic);
+  const filePath = getNoteFilePath(req.params.topic);
   try {
     let notes = JSON.parse(fs.readFileSync(filePath, "utf8"));
     const index = notes.findIndex((n) => n.id === req.params.id);
@@ -52,7 +52,7 @@ export const updateNote = (req, res) => {
 };
 
 export const deleteNote = (req, res) => {
-  const filePath = getFilePath(req.params.topic);
+  const filePath = getNoteFilePath(req.params.topic);
   try {
     let notes = JSON.parse(fs.readFileSync(filePath, "utf8"));
     const newNotes = notes.filter((n) => n.id !== req.params.id);
