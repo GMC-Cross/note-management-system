@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dataDir = path.join(__dirname, "../data");
+const dataDir = path.join(__dirname, "../../data");
 const notesDir = path.join(dataDir, "notes");
 
 if (!fs.existsSync(dataDir)) {
@@ -16,14 +16,13 @@ if (!fs.existsSync(notesDir)) {
 }
 
 export const profilePath = path.join(dataDir, "profile.json");
-export const privateNotesFile = path.join(dataDir, "private.json");
-
-export const getNoteFilePath = (topic) => {
+export const privatePath = path.join(dataDir, "private.json");
+export const notePath = (topic) => {
   return path.join(notesDir, `${topic}.json`);
 };
 
-if (!fs.existsSync(privateNotesFile)) {
-  fs.writeFileSync(privateNotesFile, "[]", "utf8");
+if (!fs.existsSync(privatePath)) {
+  fs.writeFileSync(privatePath, "[]", "utf8");
 }
 
 if (!fs.existsSync(profilePath)) {

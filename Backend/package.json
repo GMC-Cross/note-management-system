@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/GMC-Cross/note-management-system#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "body-parser": "^2.3.0",
     "cores": "^0.8.0",
     "cors": "^2.8.6",

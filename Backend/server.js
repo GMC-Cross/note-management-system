@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/api/profile", profileRouter);
 app.use("/api/private", privateRouter);
-app.use("/api/note", noteRouter);
+app.use("/api/notes", noteRouter);
 
 app.listen(5000, () => {
   console.log("Server is running on http://localhost:5000");

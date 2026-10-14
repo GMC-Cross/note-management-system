@@ -1,78 +1,94 @@
-import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { AppContext } from '../context/AppContext';
+import React, { useContext } from "react";
+import { Outlet, NavLink } from "react-router-dom";
+import {
+  FileText,
+  Lock,
+  Settings,
+  Notebook,
+  Sun,
+  Moon,
+  User,
+} from "lucide-react";
+import { AppContext } from "../context/AppContext";
 
-const MainLayout = () => {
-  const { theme, toggleTheme, displayName } = useContext(AppContext);
+export default function MainLayout() {
+  const { displayName, theme, toggleTheme } = useContext(AppContext);
 
-  // Logic CSS đổi màu nền và màu chữ theo state theme
-  const isDark = theme === 'dark';
+  const navItemClass = ({ isActive }) =>
+    `flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
+      isActive
+        ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+        : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
+    }`;
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        minHeight: '100vh',
-        backgroundColor: isDark ? '#121212' : '#ffffff',
-        color: isDark ? '#ffffff' : '#1a1a1a',
-        transition: 'all 0.3s ease',
-      }}
-    >
-      {/* Sidebar chứa link điều hướng */}
-      <aside
-        style={{
-          width: '240px',
-          padding: '20px',
-          borderRight: isDark ? '1px solid #333' : '1px solid #e0e0e0',
-          backgroundColor: isDark ? '#1e1e1e' : '#f8f9fa',
-          display: 'flex',
-          flexDirection: 'column',
-          justify: 'space-between',
-        }}
-      >
+    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950 font-sans transition-colors duration-200">
+      {/* Sidebar bên trái */}
+      <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 flex flex-col justify-between shrink-0">
         <div>
-          <h3 style={{ marginTop: 0 }}>Ứng Dụng</h3>
-          <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-              🏠 Home
-            </Link>
-            <Link to="/settings" style={{ color: 'inherit', textDecoration: 'none' }}>
-              ⚙️ Cài đặt
-            </Link>
-            <Link to="/private" style={{ color: 'inherit', textDecoration: 'none' }}>
-              🔒 Vùng kín
-            </Link>
+          {/* Logo ứng dụng */}
+          <div className="flex items-center gap-3 px-2 py-3 mb-6">
+            <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/30">
+              <Notebook className="w-5 h-5" />
+            </div>
+            <div>
+              <h1 className="font-bold text-base text-slate-800 dark:text-white leading-tight">
+                My Notes
+              </h1>
+              <p className="text-xs text-slate-400 dark:text-slate-500">
+                Workspace cá nhân
+              </p>
+            </div>
+          </div>
+
+          {/* Menu Điều Hướng */}
+          <nav className="flex flex-col gap-1.5">
+            <NavLink to="/" className={navItemClass}>
+              <FileText className="w-4 h-4" />
+              <span>Ghi chú thường</span>
+            </NavLink>
+
+            <NavLink to="/private" className={navItemClass}>
+              <Lock className="w-4 h-4" />
+              <span>Vùng riêng tư</span>
+            </NavLink>
+
+            <NavLink to="/settings" className={navItemClass}>
+              <Settings className="w-4 h-4" />
+              <span>Cài đặt hệ thống</span>
+            </NavLink>
           </nav>
         </div>
 
-        <div style={{ paddingTop: '20px', borderTop: isDark ? '1px solid #333' : '1px solid #ddd' }}>
-          <p style={{ margin: '0 0 10px 0', fontSize: '14px' }}>
-            Xin chào: <strong>{displayName}</strong>
-          </p>
+        {/* Footer */}
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0">
+              <User className="w-4 h-4" />
+            </div>
+            <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate max-w-27.5">
+              {displayName || "Sinh viên"}
+            </span>
+          </div>
+
           <button
             onClick={toggleTheme}
-            style={{
-              padding: '8px 12px',
-              cursor: 'pointer',
-              borderRadius: '6px',
-              border: 'none',
-              backgroundColor: isDark ? '#f0f0f0' : '#333333',
-              color: isDark ? '#333333' : '#ffffff',
-              width: '100%',
-              fontWeight: 'bold',
-            }}
+            title="Đổi giao diện"
+            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
           >
-            Chế độ: {theme.toUpperCase()}
+            {theme === "dark" ? (
+              <Sun className="w-4 h-4 text-amber-400" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
           </button>
         </div>
       </aside>
 
-      {/* Vùng hiển thị trang nội dung */}
-      <main style={{ flex: 1, padding: '24px' }}>
+      {/* main */}
+      <main className="flex-1 p-8 overflow-y-auto max-h-screen">
         <Outlet />
       </main>
     </div>
   );
-};
-
-export default MainLayout;
+}
